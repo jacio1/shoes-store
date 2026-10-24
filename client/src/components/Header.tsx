@@ -1,9 +1,9 @@
-import { DialogDemo } from "./AuthDialog";
+import { AuthDialog } from "./AuthDialog";
 
 export default function Header(){
     return(
         <header className="md:hidden">
-            <DialogDemo/>
+            <AuthDialog/>
         </header>
     )
 }
