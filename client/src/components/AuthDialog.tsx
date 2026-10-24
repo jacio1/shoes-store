@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,16 +20,19 @@ type AuthMode = "login" | "register";
 export function AuthDialog() {
   const [mode, setMode] = useState<AuthMode>("login");
 
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData);
+    const { data } = Object.fromEntries(formData);
 
-    if (mode === "login") {
-      console.log("Вход:", data);
-    } else {
-      console.log("Регистрация:", data);
-    }
+    const res = await fetch(`http://localhost:4000/api/auth/${mode}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    console.log("Success", data);
+    console.log("data", data);
+    console.log(res.status, await res.text());
   };
 
   return (
