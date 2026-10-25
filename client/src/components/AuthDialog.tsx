@@ -23,7 +23,9 @@ export function AuthDialog() {
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const { data } = Object.fromEntries(formData);
+    const data = Object.fromEntries(formData);
+      delete (data as any).confirm;
+
 
     const res = await fetch(`http://localhost:4000/api/auth/${mode}`, {
       method: "POST",
@@ -91,7 +93,7 @@ export function AuthDialog() {
               <FieldGroup className="pt-4">
                 <Field>
                   <Label htmlFor="reg-name">Имя</Label>
-                  <Input id="reg-name" name="name" required />
+                  <Input id="reg-name" name="username" required />
                 </Field>
                 <Field>
                   <Label htmlFor="reg-email">Email</Label>
