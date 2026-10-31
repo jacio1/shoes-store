@@ -19,19 +19,32 @@ type AuthMode = "login" | "register";
 
 export function AuthDialog() {
   const [mode, setMode] = useState<AuthMode>("login");
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null); 
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
-      delete (data as any).confirm;
-
+    delete (data as any).confirm;
 
     const res = await fetch(`http://localhost:4000/api/auth/${mode}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
+
+    if (!res.ok) {
+      const body = await res.json().catch(() => null);
+      const message = Array.isArray(body?.message)
+        ? body.message.join(",  ")
+        : (body?.message ?? "Something went wrong");
+      setError(message);
+      return;
+    }
+
+    const user = await res.json();
+    console.log("Success", user);
     console.log("Success", data);
     console.log("data", data);
     console.log(res.status, await res.text());
@@ -92,6 +105,7 @@ export function AuthDialog() {
             <TabsContent value="register">
               <FieldGroup className="pt-4">
                 <Field>
+                  {error && <p className="text-red-600">{error}</p>}
                   <Label htmlFor="reg-name">Имя</Label>
                   <Input id="reg-name" name="username" required />
                 </Field>

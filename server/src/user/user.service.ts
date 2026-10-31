@@ -28,7 +28,7 @@ export class UserService {
     const existingUserByEmail = await this.findByEmail(createUserDto.email);
 
     if (existingUserByEmail) {
-      throw new ConflictException('User with this username already registred');
+      throw new ConflictException('User with this email already registred');
     }
     if (createUserDto.phone) {
       const existingUserByPhone = await this.findByPhone(createUserDto.phone);
