@@ -1,5 +1,6 @@
 import {
   IsEmail,
+  IsOptional,
   IsString,
   IsStrongPassword,
   Length,
@@ -10,6 +11,7 @@ export class CreateUserDto {
   @IsEmail({}, { message: 'Enter the correctly email' })
   email: string;
 
+  @IsOptional()
   @IsString({ message: 'Phone must be a string' })
   @Length(11, 11, { message: 'Enter the phone number correctly' })
   phone: string;
@@ -20,12 +22,14 @@ export class CreateUserDto {
   })
   username: string;
 
+  @IsOptional()
   @IsString({ message: 'First name must be a string' })
   @Length(2, 20, {
     message: 'The first name must be between 2 and 20 characters long.',
   })
   firstName: string;
 
+  @IsOptional()
   @IsString({ message: 'last name must be a string' })
   @Length(2, 20, {
     message: 'The last name must be between 2 and 20 characters long.',

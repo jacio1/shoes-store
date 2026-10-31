@@ -17,28 +17,25 @@ export class UserService {
 
     const userData = { ...createUserDto, password: hashedPassword };
 
-        const existingUserByUsername = await this.findByUsername(
-          createUserDto.username,
-        );
-    
-        if (existingUserByUsername) {
-          throw new ConflictException('User with this username already registred');
-        }
-    
-        const existingUserByEmail = await this.findByEmail(
-          createUserDto.email,
-        );
-    
-        if (existingUserByEmail) {
-          throw new ConflictException('User with this username already registred');
-        }
-        const existingUserByPhone = await this.findByPhone(
-          createUserDto.phone,
-        );
-    
-        if (existingUserByPhone) {
-          throw new ConflictException('User with this username already registred');
-        }
+    const existingUserByUsername = await this.findByUsername(
+      createUserDto.username,
+    );
+
+    if (existingUserByUsername) {
+      throw new ConflictException('User with this username already registred');
+    }
+
+    const existingUserByEmail = await this.findByEmail(createUserDto.email);
+
+    if (existingUserByEmail) {
+      throw new ConflictException('User with this username already registred');
+    }
+    if (createUserDto.phone) {
+      const existingUserByPhone = await this.findByPhone(createUserDto.phone);
+      if (existingUserByPhone) {
+        throw new ConflictException('User with this phone already registered');
+      }
+    }
 
     const newUser = await this.prismaService.user
       .create({
