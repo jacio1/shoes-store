@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{LOCAL_API}}auth/login"
+method: POST
+order: 1000

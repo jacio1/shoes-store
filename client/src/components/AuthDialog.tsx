@@ -45,9 +45,6 @@ export function AuthDialog() {
 
     const user = await res.json();
     console.log("Success", user);
-    console.log("Success", data);
-    console.log("data", data);
-    console.log(res.status, await res.text());
   };
 
   return (
