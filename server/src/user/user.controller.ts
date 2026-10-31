@@ -10,6 +10,7 @@ import {
 import { UserService } from './user.service.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { UpdateUserDto } from './dto/update-user.dto.js';
+import { User } from '../generated/prisma/client.js';
 
 @Controller('user')
 export class UserController {
@@ -31,7 +32,7 @@ export class UserController {
   }
 
   @Get('find-by-username/:username')
-  findByUsername(@Param('username') username: string) {
+  async findByUsername(@Param('username') username: string) {
     return this.userService.findByUsername(username);
   }
   @Get('find-by-email/:email')

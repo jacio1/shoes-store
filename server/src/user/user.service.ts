@@ -2,6 +2,7 @@ import {
   BadRequestException,
   ConflictException,
   Injectable,
+  Logger,
   NotFoundException,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto.js';
@@ -11,6 +12,7 @@ import { genSaltSync, hashSync } from 'bcrypt';
 
 @Injectable()
 export class UserService {
+  private readonly logger = new Logger(UserService.name);
   constructor(private readonly prismaService: PrismaService) {}
   async create(createUserDto: CreateUserDto) {
     const hashedPassword = this.hashPassword(createUserDto.password);
@@ -22,7 +24,10 @@ export class UserService {
     );
 
     if (existingUserByUsername) {
-      throw new ConflictException('User with this username already registred');
+      const message = 'User with this username already registred';
+
+      this.logger.error(message);
+      throw new ConflictException(message);
     }
 
     const existingUserByEmail = await this.findByEmail(createUserDto.email);
@@ -47,6 +52,10 @@ export class UserService {
 
     const { password, ...userWithoutPassword } = newUser;
     return userWithoutPassword;
+  }
+
+  async findByEmailWithPassword(email: string) {
+    return this.prismaService.user.findUnique({ where: { email } });
   }
 
   findAll() {
