@@ -1,8 +1,9 @@
+import ProductGrid from "@/components/ProductGrid";
 
 export default function Home() {
   return (
     <div>
-      <h1>главная</h1>
+      <ProductGrid/>
     </div>
   );
 }
