@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "cn";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Header";
+import MobileBottomNav from "@/components/MobileBottomNav";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -42,9 +43,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
-          >
-          <Header/>
-          {children}
+        >
+          <Header />
+          <main>{children}</main>
+          <MobileBottomNav />
         </ThemeProvider>
       </body>
     </html>

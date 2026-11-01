@@ -89,8 +89,7 @@ export default function ProductCard() {
         <Button
           type="button"
           size="sm"
-          onClick={() => {
-          }}
+          onClick={() => {}}
           className="relative z-10 w-full gap-1.5 rounded-lg text-xs sm:rounded-xl sm:text-sm"
         >
           <ShoppingBag className="size-3.5 sm:size-4" />В корзину
