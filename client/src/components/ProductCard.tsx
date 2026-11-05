@@ -29,19 +29,23 @@ export default function ProductCard() {
     ? Math.round((1 - product.price / product.oldPrice) * 100)
     : 0;
 
+  const productHref = `/product/${product.id}`;
+
   return (
     <Card className="group relative w-full gap-0 overflow-hidden rounded-xl border bg-card p-0 shadow-sm transition-all duration-300 sm:rounded-2xl sm:hover:-translate-y-1 sm:hover:shadow-xl">
       <div className="relative aspect-square overflow-hidden bg-muted">
-        <Image
-          src={product.image}
-          alt={`${product.productBrand} ${product.productModel}`}
-          fill
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 256px"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+        <Link href={productHref} aria-label={`${product.productBrand} ${product.productModel}`}>
+          <Image
+            src={product.image}
+            alt={`${product.productBrand} ${product.productModel}`}
+            fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 256px"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </Link>
 
         {discount > 0 && (
-          <Badge className="absolute left-2 top-2 bg-red-500 px-1.5 py-0 text-[11px] text-white hover:bg-red-500 sm:left-3 sm:top-3 sm:text-xs">
+          <Badge className="pointer-events-none absolute left-2 top-2 bg-red-500 px-1.5 py-0 text-[11px] text-white hover:bg-red-500 sm:left-3 sm:top-3 sm:text-xs">
             -{discount}%
           </Badge>
         )}
@@ -67,10 +71,7 @@ export default function ProductCard() {
         </p>
 
         <h3 className="line-clamp-2 min-h-[2.5em] text-xs font-medium leading-snug sm:text-sm">
-          <Link
-            href={`/product/`}
-            className="after:absolute after:inset-0 after:content-['']"
-          >
+          <Link href={productHref}>
             {product.productType} {product.productModel}
           </Link>
         </h3>

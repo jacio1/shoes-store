@@ -1,7 +1,16 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Apple, Heart, Home, LayoutDashboard, ListTodo, NotebookPen, ShoppingCart, UserCircle } from "lucide-react";
+import {
+  Apple,
+  Heart,
+  Home,
+  LayoutDashboard,
+  ListTodo,
+  NotebookPen,
+  ShoppingCart,
+  UserCircle,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -21,7 +30,7 @@ const navItems = [
     label: "Каталог",
     icon: LayoutDashboard,
   },
-    {
+  {
     href: "/cart",
     label: "Корзина",
     icon: ShoppingCart,
@@ -36,7 +45,7 @@ const navItems = [
 export default function MobileBottomNav() {
   const pathname = usePathname();
   return (
-    <nav className="shrink w-full border-t bg-background md:hidden pb-[env(safe-area-inset-bottom)]">
+    <nav className="sticky bottom-0 z-50 w-full border-t bg-background pb-[env(safe-area-inset-bottom)]"  >
       <ul className="grid grid-cols-5 ">
         {navItems.map((item) => {
           const Icon = item.icon;

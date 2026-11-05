@@ -51,7 +51,7 @@ export function AuthDialog() {
     <Dialog>
       <DialogTrigger
         render={
-          <Button className="bg-primary" variant="outline">
+          <Button className="bg-primary">
             Войти
           </Button>
         }

@@ -37,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       )}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex flex-col h-dvh overflow-hidden">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -45,8 +45,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           disableTransitionOnChange
         >
           <Header />
-          <main>{children}</main>
-          <MobileBottomNav />
+          <main className="flex-1 overflow-y-auto">{children}</main>
+          <MobileBottomNav/>
         </ThemeProvider>
       </body>
     </html>
