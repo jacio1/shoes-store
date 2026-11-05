@@ -45,7 +45,7 @@ const navItems = [
 export default function MobileBottomNav() {
   const pathname = usePathname();
   return (
-    <nav className="sticky bottom-0 z-50 w-full border-t bg-background pb-[env(safe-area-inset-bottom)]"  >
+    <nav className="shrink w-full border-t bg-background md:hidden pb-[env(safe-area-inset-bottom)]"  >
       <ul className="grid grid-cols-5 ">
         {navItems.map((item) => {
           const Icon = item.icon;
