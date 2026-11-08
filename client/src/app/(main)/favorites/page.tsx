@@ -3,6 +3,7 @@
 import ProductCard from "@/components/ProductCard";
 import EmptyFavorites from "./_components/EmptyFavorites";
 import { useFavorites } from "@/hooks/useFavorites";
+import { plural } from "@/lib/plural";
 
 export default function FavoritesPage() {
   const { favorites, isLoading, count } = useFavorites();
