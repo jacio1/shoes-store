@@ -39,5 +39,5 @@ export function useFavorites() {
 
   const count = favorites.length;
 
-  return useMemo(() => ({ favorites, count, isLoading: false }), [favorites, count]);
+  return useMemo(() => ({ favorites, count, isLoading: true }), [favorites, count]);
 }

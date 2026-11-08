@@ -1,11 +1,20 @@
-import ProductCard from "./ProductCard";
+import { cn } from "@/lib/utils";
 
-export default function ProductGrid() {
+export function ProductGrid({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <div className="grid grid-cols-2 gap-2 p-2 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-      {Array.from({ length: 10 }, (_, i) => (
-        <ProductCard key={i} />
-      ))}
+    <div
+      className={cn(
+        "grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4",
+        className,
+      )}
+    >
+      {children}
     </div>
   );
 }

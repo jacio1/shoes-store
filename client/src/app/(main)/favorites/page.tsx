@@ -1,9 +1,10 @@
 "use client";
 
 import ProductCard from "@/components/ProductCard";
+import { plural } from "@/lib/plural";
 import EmptyFavorites from "./_components/EmptyFavorites";
 import { useFavorites } from "@/hooks/useFavorites";
-import { plural } from "@/lib/plural";
+import { ProductGridSkeleton } from "@/components/ProductGridSkeleton";
 
 export default function FavoritesPage() {
   const { favorites, isLoading, count } = useFavorites();
@@ -11,14 +12,7 @@ export default function FavoritesPage() {
   if (isLoading) {
     return (
       <div className="mx-auto w-full max-w-6xl px-4 py-6">
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div
-              key={i}
-              className="aspect-[3/4] animate-pulse rounded-xl bg-muted sm:rounded-2xl"
-            />
-          ))}
-        </div>
+        <ProductGridSkeleton count={8} />
       </div>
     );
   }
@@ -38,7 +32,7 @@ export default function FavoritesPage() {
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
         {favorites.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} />
         ))}
       </div>
     </div>
